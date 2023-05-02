@@ -1,0 +1,1 @@
+# w7_javascript_web_fronted_applications
