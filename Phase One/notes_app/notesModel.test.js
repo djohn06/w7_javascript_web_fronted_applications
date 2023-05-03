@@ -6,15 +6,18 @@ describe("notes_app", () => {
     expect(model.getNotes()).toEqual([]);
   })
 
-  it('adds a note to the array', () => {
+  it('adds two notes to the array', () => {
     model = new NotesModel;
     model.addNotes('Buy milk');
-    expect(model.getNotes()).toEqual(['Buy milk']);
+    model.addNotes('Go to the gym');
+    expect(model.getNotes()).toEqual(['Buy milk', 'Go to the gym']);
   })
 
   it('resets notes array', () => {
-    model = ['Buy milk', 'Go to the gym'];
+    model = new NotesModel
+    model.addNotes('Buy milk');
+    model.addNotes('Go to the gym');
     model.reset();
-    expect(getNotes()).toEqual
+    expect(model.getNotes()).toEqual([]);
   })
 })
