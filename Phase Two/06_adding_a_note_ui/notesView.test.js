@@ -3,23 +3,43 @@
  */
 
 const fs = require('fs');
-const NotesView = require('./notesView');
+
 const NotesModel = require('./notesModel');
+const NotesView = require('./notesView'); 
 
-describe('views', () => {
-  beforeEach(() => {
+describe('Notes view', () => {
+  it('displays two notes', () => {
     document.body.innerHTML = fs.readFileSync('./index.html');
-  })
 
-  it('returns list of notes', () => {
-    // Arrange
-    view = new NotesView
-    model = new NotesModel
-    // Add
-    model.addNotes("The first note in the list");
-    model.addNotes("The second note in the list");
+    // 1. Setting up model and view
+    const model = new NotesModel();
+    const view = new NotesView(model);
+    model.addNote('A first note');
+    model.addNote('Another one');
+    
+    // 2. Display the notes on the page
     view.displayNotes();
-    // Assert
+
+    // 3. There should now be 2 div.note on the page
     expect(document.querySelectorAll('div.note').length).toEqual(2);
-  })
-})
+  });
+
+  it('adds a new note', () => {
+  document.body.innerHTML = fs.readFileSync('./index.html');
+
+  const model = new NotesModel();
+  const view = new NotesView(model);
+
+  // 1. Fill the input
+  const input = document.querySelector('#add-note-input');
+  input.value = 'My new amazing test note';
+
+  // 2. Click the button
+  const button = document.querySelector('#add-note-btn');
+  button.click();
+
+  // 3. The note should be on the page
+  expect(document.querySelectorAll('div.note').length).toEqual(1);
+  expect(document.querySelectorAll('div.note')[0].textContent).toEqual('My new amazing test note');
+});
+});
