@@ -5,7 +5,7 @@ class NotesView {
   }
   
   displayNotes() {
-    const notes = this.model.getNotes();
+    const notes = this.model.getNotes()
 
     // For each note, create and append a new element on the main container
     notes.forEach(note => {
